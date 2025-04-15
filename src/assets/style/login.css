@@ -1,0 +1,160 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.login-form {
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-title {
+    color: #252525da;
+    text-align: start;
+    margin-bottom: 5.5rem;
+    font-size: 2.3rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #4FACFE;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.container-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.password-toggle {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+}
+
+.password-toggle:hover {
+    color: #4FACFE;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.forgot-password a {
+    color: #4FACFE;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.submit-button-login {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4FACFE;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.submit-button:hover {
+    background-color: #4899e0;
+}
+
+.create-account {
+    text-align: right;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.create-account a {
+    color: #4FACFE;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.create-account a:hover {
+    text-decoration: underline;
+}
+
+/* Mensagem de erro */
+.error-message {
+    color: #e74c3c;
+    background-color: #fadbd8;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-top: -3rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.saiba-mais {
+    text-align: center;
+    margin-top: 3.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.saiba-mais a {
+    color: #4FACFE;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.saiba-mais a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .login-form {
+        padding: 1.5rem;
+    }
+}

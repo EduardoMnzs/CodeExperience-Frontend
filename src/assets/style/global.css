@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'NunitoSans';
+    src: url('../fonts/NunitoSans.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'NunitoSans', -apple-system, BlinkMacSystemFont, sans-serif;
+}

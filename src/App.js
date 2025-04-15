@@ -6,13 +6,15 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
+import GlobalStyle from './assets/style/global.css';
 
 function App() {
   return (
     <div className="App">
-      <Layout />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<><Layout /> <Home /></>} />
+        <Route path="/about" element={<><Layout /></>} />
+        <Route path="/contact" element={<><Layout /></>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route

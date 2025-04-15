@@ -1,45 +1,87 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import '../../assets/style/login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login({ email, password });
+      navigate('/codeexperience');
     } catch (err) {
-      setError('Invalid credentials');
+      setError('Credenciais inválidas. Por favor, tente novamente.');
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2 className="form-title">Faça Login <br></br>
+          na sua conta</h2>
+
+        {error && <p className="error-message">{error}</p>}
+
+        <div className="form-group">
+          <label className="form-label">Email</label>
           <input
+            className="form-input"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Digite seu email"
           />
         </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+
+        <div className="form-group">
+          <label className="form-label">Senha</label>
+          <div className="password-input-container">
+            <input
+              className="form-input"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Digite sua senha"
+            />
+            <span
+              className="password-toggle"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+          <div className='container-links'>
+            <div className="forgot-password">
+              <Link to="/forgot-password">Esqueceu a senha?</Link>
+            </div>
+            <div className="create-account">
+              <span>Não tem conta? </span>
+              <Link to="/register">Criar conta</Link>
+            </div>
+          </div>
         </div>
-        <button type="submit">Login</button>
+
+        <button className="submit-button-login" type="submit">Entrar</button>
+
+        <div className="saiba-mais">
+          <span>Não conhece o Code Experience?</span>
+          <Link to="/about"> Saiba mais</Link>
+        </div>
+
       </form>
     </div>
   );
