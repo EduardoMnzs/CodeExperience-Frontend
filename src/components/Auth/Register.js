@@ -84,20 +84,22 @@ const Register = () => {
     }
   
     try {
+      // Ajuste para enviar exatamente como o backend espera
       const userData = {
         nome: formData.nome,
         email: formData.email,
-        cpf: formData.cpf,
-        telefone: formData.telefone,
-        data_nascimento: formData.dataNascimento,
+        cpf: formData.cpf.replace(/\D/g, ''), // Remove formatação do CPF
+        telefone: formData.telefone.replace(/\D/g, ''), // Remove formatação do telefone
+        data_nascimento: formData.dataNascimento, // Usa o nome do campo como esperado pelo backend
         instituicao_id: parseInt(formData.instituicaoId),
-        password: formData.senha
+        senha: formData.senha // Campo corrigido para "senha" em vez de "password"
       };
   
+      console.log('Enviando dados:', userData); // Para depuração
       await register(userData);
       navigate('/login');
     } catch (err) {
-      setError(err.message || 'Erro no cadastro. Por favor, tente novamente.');
+      setError(err.response?.data?.message || 'Erro no cadastro. Por favor, tente novamente.');
     }
   };
 
@@ -174,6 +176,7 @@ const Register = () => {
                 value={formData.dataNascimento}
                 onChange={handleChange}
                 required
+                max={new Date().toISOString().split('T')[0]} 
               />
             </div>
           </div>

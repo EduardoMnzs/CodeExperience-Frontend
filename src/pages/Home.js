@@ -4,7 +4,6 @@ import frascoAzul from '../assets/images/frascoAzul.png';
 import experiencia from '../assets/images/experiencia.png';
 import python from '../assets/images/python.png';
 import presente from '../assets/images/presentes.png';
-import fundo from '../assets/images/fundo.png';
 
 const Home = () => {
   return (

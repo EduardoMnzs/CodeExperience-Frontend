@@ -6,7 +6,7 @@ import '../../assets/style/login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
@@ -15,7 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login({ email, password });
+      await login({ email, senha });
       navigate('/codeexperience');
     } catch (err) {
       setError('Credenciais inválidas. Por favor, tente novamente.');
@@ -52,7 +52,7 @@ const Login = () => {
             <input
               className="form-input"
               type={showPassword ? "text" : "password"}
-              value={password}
+              value={senha}
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="Digite sua senha"
