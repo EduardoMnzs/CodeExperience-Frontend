@@ -84,18 +84,17 @@ const Register = () => {
     }
   
     try {
-      // Ajuste para enviar exatamente como o backend espera
       const userData = {
         nome: formData.nome,
         email: formData.email,
-        cpf: formData.cpf.replace(/\D/g, ''), // Remove formatação do CPF
-        telefone: formData.telefone.replace(/\D/g, ''), // Remove formatação do telefone
-        data_nascimento: formData.dataNascimento, // Usa o nome do campo como esperado pelo backend
+        cpf: formData.cpf.replace(/\D/g, ''),
+        telefone: formData.telefone.replace(/\D/g, ''),
+        data_nascimento: formData.dataNascimento,
         instituicao_id: parseInt(formData.instituicaoId),
-        senha: formData.senha // Campo corrigido para "senha" em vez de "password"
+        senha: formData.senha
       };
   
-      console.log('Enviando dados:', userData); // Para depuração
+      console.log('Enviando dados:', userData);
       await register(userData);
       navigate('/login');
     } catch (err) {

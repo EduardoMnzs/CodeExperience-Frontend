@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import logo from '../assets/images/logo.png';
-import docs from '../assets/icons/docs.png';
 import '../assets/style/codeexperience.css';
+import ExerciseCards from '../components/Exercises/ExerciseCards';
 
 const CodeExperience = () => {
     const [keyword, setKeyword] = useState('');
+    const { user, logout } = useAuth();
+
+    const firstName = user?.nome?.split(' ')[0] || 'Aluno';
+
+    const handleLogout = () => {
+        logout();
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -52,22 +60,25 @@ const CodeExperience = () => {
 
     return (
         <div className="code-experience-page">
-            {/* Header mantido conforme seu código original */}
             <header className="header">
                 <nav className="header__nav">
                     <Link to="/" className="header__logo-container">
                         <img src={logo} alt="Logo" className="header__logo" />
                     </Link>
+                    <div className="header__nav-links">
+                        <Link onClick={handleLogout} to="/login" className="header__nav-link">Sair</Link>
+                    </div>
                 </nav>
             </header>
 
-            {/* Conteúdo principal da página Code Experience */}
             <main className="code-experience-container">
-                <h1 className="code-experience-title">Bem Vindo! Aluno</h1>
+                <h1 className="code-experience-title">
+                    Bem Vindo, {firstName}!
+                </h1>
 
                 <div className="progress-section">
                     <h2>Progresso - Code Experience</h2>
-                    <h1 style={{color: `${progressColor}`}} >{progress}% Completo</h1>
+                    <h1 style={{ color: `${progressColor}` }} >{progress}% Completo</h1>
                     <div className="progress-bar">
                         <div className="progress-fill" style={{ width: `${progress}%`, background: `${progressColor}` }}></div>
                     </div>
@@ -75,70 +86,7 @@ const CodeExperience = () => {
 
                 <div className="exercises-section">
                     <h3>Exercícios de Fixação</h3>
-
-                    <div className="exercise-cards">
-                        {/* Exercícios Básicos */}
-                        <div className="exercise-card">
-                            <div className='exercise-card-img'>
-                                <img className='img-docs' src={docs} alt='básico 1'></img>
-                            </div>
-                            <div className='exercise-card-text'>
-                                <h4>Básico I</h4>
-                                <p>Tenha acesso a exercícios básicos de programação em Python para iniciar do jeito certo.</p>
-                            </div>
-                        </div>
-
-                        <div className="exercise-card">
-                            <div className='exercise-card-img'>
-                                <img className='img-docs' src={docs} alt='básico 2'></img>
-                            </div>
-                            <div className='exercise-card-text'>
-                                <h4>Básico II</h4>
-                                <p>Tenha acesso a exercícios básicos de programação em Python para iniciar do jeito certo.</p>
-                            </div>
-                        </div>
-
-                        <div className="exercise-card">
-                            <div className='exercise-card-img'>
-                                <img className='img-docs' src={docs} alt='básico 3'></img>
-                            </div>
-                            <div className='exercise-card-text'>
-                                <h4>Básico III</h4>
-                                <p>Tenha acesso a exercícios básicos de programação em Python para iniciar do jeito certo.</p>
-                            </div>
-                        </div>
-
-                        {/* Exercícios Intermediários */}
-                        <div className="exercise-card">
-                            <div className='exercise-card-img'>
-                                <img className='img-docs' src={docs} alt='Intermediário 1'></img>
-                            </div>
-                            <div className='exercise-card-text'>
-                                <h4>Intermediário I</h4>
-                                <p>Tenha acesso a exercícios básicos de programação em Python para iniciar do jeito certo.</p>
-                            </div>
-                        </div>
-
-                        <div className="exercise-card">
-                            <div className='exercise-card-img'>
-                                <img className='img-docs' src={docs} alt='Intermediário 1'></img>
-                            </div>
-                            <div className='exercise-card-text'>
-                                <h4>Intermediário II</h4>
-                                <p>Tenha acesso a exercícios básicos de programação em Python para iniciar do jeito certo.</p>
-                            </div>
-                        </div>
-
-                        <div className="exercise-card">
-                            <div className='exercise-card-img'>
-                                <img className='img-docs' src={docs} alt='Intermediário 1'></img>
-                            </div>
-                            <div className='exercise-card-text'>
-                                <h4>Intermediário III</h4>
-                                <p>Tenha acesso a exercícios básicos de programação em Python para iniciar do jeito certo.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <ExerciseCards />
                 </div>
 
                 <div className="divider"></div>
