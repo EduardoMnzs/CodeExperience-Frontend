@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
 import '../../assets/style/register.css';
 import { formatCPF, formatPhone } from '../../utils/formatters';
+import { validarCPF, validarSenha } from '../../utils/validador';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -77,12 +78,30 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    setError("");
+    setConfirmacaoError("");
+
+    formData.cpf = formData.cpf.replace(/\D/g, '');
+
+    if (!validarCPF(formData.cpf)) {
+      console.log(formData.cpf);
+      setError('CPF inválido');
+      return;
+    }
+
+    const validacaoSenha = validarSenha(formData.senha);
+    if (!validacaoSenha.valido) {
+      setError(validacaoSenha.mensagem);
+      return;
+    }
+
+
     if (formData.senha !== formData.confirmarSenha) {
       setError('As senhas não coincidem');
       return;
     }
-  
+
     try {
       const userData = {
         nome: formData.nome,
@@ -93,7 +112,7 @@ const Register = () => {
         instituicao_id: parseInt(formData.instituicaoId),
         senha: formData.senha
       };
-  
+
       console.log('Enviando dados:', userData);
       await register(userData);
       navigate('/login');
@@ -175,7 +194,7 @@ const Register = () => {
                 value={formData.dataNascimento}
                 onChange={handleChange}
                 required
-                max={new Date().toISOString().split('T')[0]} 
+                max={new Date().toISOString().split('T')[0]}
               />
             </div>
           </div>
@@ -215,21 +234,19 @@ const Register = () => {
               <label className="form-label">Senha:</label>
               <div className="password-input-container">
                 <input
-                  className="form-input"
+                  className={`form-input`}
                   type={showPassword ? "text" : "password"}
                   name="senha"
                   value={formData.senha}
                   onChange={handleChange}
                   required
-                  placeholder="Crie uma senha"
+                  placeholder="Digite sua senha"
                 />
-                <span
-                  className="password-toggle"
-                  onClick={togglePasswordVisibility}
-                >
+                <span className="password-toggle" onClick={togglePasswordVisibility}>
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </div>
+
             </div>
 
             <div className="form-group">
@@ -244,16 +261,30 @@ const Register = () => {
                   required
                   placeholder="Confirme sua senha"
                 />
-                <span
-                  className="password-toggle"
-                  onClick={toggleConfirmPasswordVisibility}
-                >
+                <span className="password-toggle" onClick={toggleConfirmPasswordVisibility}>
                   {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </div>
-              {confirmacaoError && (
-                <p className="error-text">{confirmacaoError}</p>
-              )}
+              {confirmacaoError && <p className="error-text">{confirmacaoError}</p>}
+
+              <div className="senha-requisitos">
+                <small>A senha deve conter:</small>
+                <ul>
+                  <li className={formData.senha.length >= 8 ? "valido" : "invalido"}>
+                    Mínimo 8 caracteres
+                  </li>
+                  <li className={/[A-Z]/.test(formData.senha) ? "valido" : "invalido"}>
+                    Pelo menos 1 letra maiúscula
+                  </li>
+                  <li className={/[0-9]/.test(formData.senha) ? "valido" : "invalido"}>
+                    Pelo menos 1 número
+                  </li>
+                  <li className={/[!@#$%^&*(),.?":{}|<>]/.test(formData.senha) ? "valido" : "invalido"}>
+                    Pelo menos 1 caractere especial
+                  </li>
+                </ul>
+              </div>
+
             </div>
           </div>
         </div>

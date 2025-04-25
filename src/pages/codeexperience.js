@@ -4,10 +4,14 @@ import { useAuth } from '../context/AuthContext';
 import logo from '../assets/images/logo.png';
 import '../assets/style/codeexperience.css';
 import ExerciseCards from '../components/Exercises/ExerciseCards';
+import { presencaAPI } from '../api/presenca';
+import { FaSignOutAlt } from 'react-icons/fa';
+import Notification from '../components/Notification/Notification';
 
 const CodeExperience = () => {
     const [keyword, setKeyword] = useState('');
     const { user, logout } = useAuth();
+    const [notification, setNotification] = useState({ message: '', type: '' });
 
     const firstName = user?.nome?.split(' ')[0] || 'Aluno';
 
@@ -17,43 +21,42 @@ const CodeExperience = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
-        if (!keyword || !localizacao.latitude || !localizacao.longitude) {
-          alert('Preencha a palavra-chave e permita a localização!');
-          return;
+
+        const trimmedKeyword = keyword.trim().toLowerCase();
+        console.log('Palavra-chave:', trimmedKeyword);
+
+        if (!trimmedKeyword || !localizacao.latitude || !localizacao.longitude) {
+            setNotification({
+                message: 'Preencha a palavra-chave e permita a localização!',
+                type: 'error'
+            });
+            return;
         }
-      
+
         try {
-          const apiUrl = process.env.REACT_APP_API_BASE_URL;
-          const token = localStorage.getItem('token');
-      
-          const response = await fetch(`${apiUrl}/presenca`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              palavraChave: keyword,
-              latitude: localizacao.latitude,
-              longitude: localizacao.longitude
-            })
-          });
-      
-          const data = await response.json();
-      
-          if (response.ok) {
-            alert('Presença registrada com sucesso!');
-          } else {
-            alert(`Erro: ${data.error || 'Não foi possível registrar presença'}`);
-          }
-      
-          setKeyword('');
+            await presencaAPI.registrar({
+                palavraChave: trimmedKeyword,
+                latitude: localizacao.latitude,
+                longitude: localizacao.longitude
+            });
+
+            setNotification({
+                message: 'Presença registrada com sucesso!',
+                type: 'success'
+            });
+            setKeyword('');
         } catch (error) {
-          console.error(error);
-          alert('Erro ao registrar presença.');
+            console.error(error);
+            setNotification({
+                message: error.response?.data?.error || 'Erro ao registrar presença.',
+                type: 'error'
+            });
         }
-      };
+    };
+
+    const closeNotification = () => {
+        setNotification({ message: '', type: '' });
+    };
 
     const calculateWorkingDays = (startDate, endDate) => {
         let count = 0;
@@ -93,7 +96,29 @@ const CodeExperience = () => {
     }
 
     const [localizacao, setLocalizacao] = useState({ latitude: null, longitude: null });
-    const [erro, setErro] = useState(null);
+    const [, setErro] = useState(null);
+
+    const [inputHabilitado, setInputHabilitado] = useState(false);
+    const [buttonHabilitado, setButtonHabilitado] = useState(false);
+
+    useEffect(() => {
+        const verificarHorario = () => {
+            const agora = new Date();
+            const hora = agora.getHours();
+            const minuto = agora.getMinutes();
+
+            // Ajuste o horário conforme necessário aqui
+            const dentroDoHorario = ((hora >= 17 && hora < 19) || (hora === 17 && minuto === 30));
+
+            setInputHabilitado(dentroDoHorario);
+            setButtonHabilitado(dentroDoHorario);
+        };
+
+        verificarHorario();
+        const intervalo = setInterval(verificarHorario, 60 * 1000);
+
+        return () => clearInterval(intervalo);
+    }, []);
 
     useEffect(() => {
         if ('geolocation' in navigator) {
@@ -115,24 +140,29 @@ const CodeExperience = () => {
 
     return (
         <div className="code-experience-page">
-            <h2>Sua Localização:</h2>
-            {localizacao.latitude && localizacao.longitude ? (
-                <p>Latitude: {localizacao.latitude}, Longitude: {localizacao.longitude}</p>
-            ) : erro ? (
-                <p>Erro: {erro}</p>
-            ) : (
-                <p>Carregando localização...</p>
-            )}
             <header className="header">
                 <nav className="header__nav">
                     <Link to="/" className="header__logo-container">
                         <img src={logo} alt="Logo" className="header__logo" />
                     </Link>
                     <div className="header__nav-links">
-                        <Link onClick={handleLogout} to="/login" className="header__nav-link">Sair</Link>
+                        <button
+                            onClick={handleLogout}
+                            className="header__nav-link logout-button"
+                        >
+                            <FaSignOutAlt style={{ marginRight: '8px' }} /> Sair
+                        </button>
                     </div>
                 </nav>
             </header>
+
+            {notification.message && (
+                <Notification
+                    message={notification.message}
+                    type={notification.type}
+                    onClose={closeNotification}
+                />
+            )}
 
             <main className="code-experience-container">
                 <h1 className="code-experience-title">
@@ -161,10 +191,10 @@ const CodeExperience = () => {
                             type="text"
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
-                            placeholder="Indisponível"
-                            
+                            placeholder={inputHabilitado ? "Digite a palavra-chave" : "Indisponível"}
+                            disabled={!inputHabilitado}
                         />
-                        <button type="submit">Enviar</button>
+                        <button type="submit" disabled={!buttonHabilitado}>Enviar</button>
                     </form>
                 </div>
             </main>

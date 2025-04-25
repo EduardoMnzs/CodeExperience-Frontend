@@ -4,6 +4,7 @@
     justify-content: space-between;
     max-width: 1800px;
     margin: 0 auto;
+    padding: 15px;
 }
 
 .header__logo-container {

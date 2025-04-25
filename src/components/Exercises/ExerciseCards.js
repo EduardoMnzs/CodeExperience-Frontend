@@ -5,7 +5,7 @@ import { format, parseISO, isAfter, addDays } from 'date-fns';
 
 const ExerciseCards = () => {
   // Data de início do curso
-  const courseStartDate = '2025-04-22';
+  const courseStartDate = '2025-05-05';
   
   const exerciseData = [
     {
@@ -21,13 +21,19 @@ const ExerciseCards = () => {
           id: 2, 
           title: 'Básico II', 
           description: 'Estruturas de controle e funções básicas.',
-          unlockDay: 3
+          unlockDay: 2
         },
         {
           id: 3, 
           title: 'Básico III', 
           description: 'Trabalhando com listas e dicionários.',
-          unlockDay: 5
+          unlockDay: 3
+        },
+        {
+          id: 4, 
+          title: 'Básico IV', 
+          description: 'Trabalhando com listas e dicionários.',
+          unlockDay: 4
         }
       ]
     },
@@ -35,22 +41,22 @@ const ExerciseCards = () => {
       level: 'Intermediário',
       items: [
         {
-          id: 4, 
+          id: 5, 
           title: 'Intermediário I', 
           description: 'Funções avançadas e manipulação de arquivos.',
-          unlockDay: 7
+          unlockDay: 5
         },
         {
-          id: 5,
+          id: 6,
           title: 'Intermediário II',
           description: 'Programação orientada a objetos básica.',
-          unlockDay: 10
+          unlockDay: 8
         },
         { 
-          id: 6, 
+          id: 7, 
           title: 'Intermediário III', 
           description: 'Módulos e pacotes em Python.',
-          unlockDay: 14
+          unlockDay: 9
         }
       ]
     },
@@ -58,22 +64,22 @@ const ExerciseCards = () => {
       level: 'Avançado',
       items: [
         {
-          id: 7, 
+          id: 8, 
           title: 'Avançado I', 
           description: 'Programação orientada a objetos avançada.',
-          unlockDay: 17
-        },
-        {
-          id: 8, 
-          title: 'Avançado II', 
-          description: 'Manipulação de dados com Pandas.',
-          unlockDay: 20
+          unlockDay: 10
         },
         {
           id: 9, 
+          title: 'Avançado II', 
+          description: 'Manipulação de dados com Pandas.',
+          unlockDay: 11
+        },
+        {
+          id: 10, 
           title: 'Avançado III', 
           description: 'Introdução ao Machine Learning.',
-          unlockDay: 25
+          unlockDay: 12
         }
       ]
     }
