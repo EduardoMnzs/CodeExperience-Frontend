@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import logo from '../assets/images/logo.png';
@@ -15,11 +15,45 @@ const CodeExperience = () => {
         logout();
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert(`Palavra-chave enviada: ${keyword}`);
-        setKeyword('');
-    };
+      
+        if (!keyword || !localizacao.latitude || !localizacao.longitude) {
+          alert('Preencha a palavra-chave e permita a localização!');
+          return;
+        }
+      
+        try {
+          const apiUrl = process.env.REACT_APP_API_BASE_URL;
+          const token = localStorage.getItem('token');
+      
+          const response = await fetch(`${apiUrl}/presenca`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              palavraChave: keyword,
+              latitude: localizacao.latitude,
+              longitude: localizacao.longitude
+            })
+          });
+      
+          const data = await response.json();
+      
+          if (response.ok) {
+            alert('Presença registrada com sucesso!');
+          } else {
+            alert(`Erro: ${data.error || 'Não foi possível registrar presença'}`);
+          }
+      
+          setKeyword('');
+        } catch (error) {
+          console.error(error);
+          alert('Erro ao registrar presença.');
+        }
+      };
 
     const calculateWorkingDays = (startDate, endDate) => {
         let count = 0;
@@ -58,8 +92,37 @@ const CodeExperience = () => {
         progressColor = 'rgb(65 208 127)';
     }
 
+    const [localizacao, setLocalizacao] = useState({ latitude: null, longitude: null });
+    const [erro, setErro] = useState(null);
+
+    useEffect(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLocalizacao({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    });
+                },
+                (error) => {
+                    setErro(error.message);
+                }
+            );
+        } else {
+            setErro('Geolocalização não é suportada neste navegador.');
+        }
+    }, []);
+
     return (
         <div className="code-experience-page">
+            <h2>Sua Localização:</h2>
+            {localizacao.latitude && localizacao.longitude ? (
+                <p>Latitude: {localizacao.latitude}, Longitude: {localizacao.longitude}</p>
+            ) : erro ? (
+                <p>Erro: {erro}</p>
+            ) : (
+                <p>Carregando localização...</p>
+            )}
             <header className="header">
                 <nav className="header__nav">
                     <Link to="/" className="header__logo-container">
@@ -99,7 +162,7 @@ const CodeExperience = () => {
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
                             placeholder="Indisponível"
-                            disabled
+                            
                         />
                         <button type="submit">Enviar</button>
                     </form>
