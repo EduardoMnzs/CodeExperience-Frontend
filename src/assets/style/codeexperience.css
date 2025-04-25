@@ -90,7 +90,7 @@ h2 {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     margin-bottom: 30px;
-    max-height: 400px;  /* Defina a altura máxima para o contêiner */
+    max-height: 400px;
     overflow-y: auto; 
     padding-right: 15px;
 }

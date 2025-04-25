@@ -22,17 +22,17 @@
 }
 
 .notification-success {
-    background-color: #4CAF50b3;  /* Verde */
+    background-color: #4CAF50b3;
     color: white;
 }
 
 .notification-error {
-    background-color: #f44336b3; /* Vermelho */
+    background-color: #f44336b3;
     color: white;
 }
 
 .notification-info {
-    background-color: #4facfeb3; /* Azul */
+    background-color: #4facfeb3;
     color: white;
 }
 

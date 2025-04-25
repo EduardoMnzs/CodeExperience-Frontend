@@ -7,11 +7,13 @@ import ExerciseCards from '../components/Exercises/ExerciseCards';
 import { presencaAPI } from '../api/presenca';
 import { FaSignOutAlt } from 'react-icons/fa';
 import Notification from '../components/Notification/Notification';
+import Popup from '../components/Notification/Popup';
 
 const CodeExperience = () => {
     const [keyword, setKeyword] = useState('');
     const { user, logout } = useAuth();
     const [notification, setNotification] = useState({ message: '', type: '' });
+    const [showPopup, setShowPopup] = useState(false);
 
     const firstName = user?.nome?.split(' ')[0] || 'Aluno';
 
@@ -108,7 +110,7 @@ const CodeExperience = () => {
             const minuto = agora.getMinutes();
 
             // Ajuste o horário conforme necessário aqui
-            const dentroDoHorario = ((hora >= 17 && hora < 19) || (hora === 17 && minuto === 30));
+            const dentroDoHorario = ((hora >= 1 && hora < 19) || (hora === 17 && minuto === 30));
 
             setInputHabilitado(dentroDoHorario);
             setButtonHabilitado(dentroDoHorario);
@@ -147,7 +149,7 @@ const CodeExperience = () => {
                     </Link>
                     <div className="header__nav-links">
                         <button
-                            onClick={handleLogout}
+                            onClick={() => setShowPopup(true)}
                             className="header__nav-link logout-button"
                         >
                             <FaSignOutAlt style={{ marginRight: '8px' }} /> Sair
@@ -161,6 +163,17 @@ const CodeExperience = () => {
                     message={notification.message}
                     type={notification.type}
                     onClose={closeNotification}
+                />
+            )}
+
+            {showPopup && (
+                <Popup
+                    message="Tem certeza que deseja sair?"
+                    onConfirm={() => {
+                        setShowPopup(false);
+                        handleLogout();
+                    }}
+                    onCancel={() => setShowPopup(false)}
                 />
             )}
 
