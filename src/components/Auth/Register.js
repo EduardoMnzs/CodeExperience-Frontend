@@ -85,7 +85,6 @@ const Register = () => {
     formData.cpf = formData.cpf.replace(/\D/g, '');
 
     if (!validarCPF(formData.cpf)) {
-      console.log(formData.cpf);
       setError('CPF inválido');
       return;
     }
@@ -113,7 +112,6 @@ const Register = () => {
         senha: formData.senha
       };
 
-      console.log('Enviando dados:', userData);
       await register(userData);
       navigate('/login');
     } catch (err) {

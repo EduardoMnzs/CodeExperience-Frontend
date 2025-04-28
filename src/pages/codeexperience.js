@@ -25,7 +25,6 @@ const CodeExperience = () => {
         e.preventDefault();
 
         const trimmedKeyword = keyword.trim().toLowerCase();
-        console.log('Palavra-chave:', trimmedKeyword);
 
         if (!trimmedKeyword || !localizacao.latitude || !localizacao.longitude) {
             setNotification({
@@ -143,7 +142,7 @@ const CodeExperience = () => {
     return (
         <div className="code-experience-page">
             <header className="header">
-                <nav className="header__nav">
+                <nav className="header__nav_code-experience">
                     <Link to="/" className="header__logo-container">
                         <img src={logo} alt="Logo" className="header__logo" />
                     </Link>

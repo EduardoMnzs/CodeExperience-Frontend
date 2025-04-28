@@ -1,13 +1,30 @@
+/* Estilos base */
+.header {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 .header__nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    white-space: nowrap;
     max-width: 1800px;
     margin: 0 auto;
-    padding: 15px;
 }
 
 .header__logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header__logo-link {
     display: flex;
     align-items: center;
 }
@@ -16,6 +33,11 @@
     height: 100px;
     width: auto;
     margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.header__logo:hover {
+    transform: scale(1.05);
 }
 
 .header__nav-list {
@@ -37,6 +59,7 @@
     font-weight: 500;
     transition: color 0.3s ease;
     padding: 0.5rem 0;
+    position: relative;
 }
 
 .header__nav-link:hover {
@@ -51,24 +74,171 @@
     text-decoration: none;
     border-radius: 4px;
     font-weight: 500;
-    transition: background-color 0.3s ease;
-  }
-  
-  .header__login-button:hover {
-    background-color: #1f7bb8;
-  }
-.header__logout-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.header__logout-button:hover {
-    background-color: #c0392b;
+.header__login-button:hover {
+    background-color: #1f7bb8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos do menu hambúrguer */
+.header__menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    z-index: 100;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.hamburger-bar {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: #252525;
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger-bar:nth-child(1) {
+    top: 6px;
+}
+
+.hamburger-bar:nth-child(2) {
+    top: 14px;
+}
+
+.hamburger-bar:nth-child(3) {
+    top: 22px;
+}
+
+.hamburger-box {
+    width: 30px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+}
+
+.hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -2px;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    width: 30px;
+    height: 3px;
+    background-color: #252525;
+    border-radius: 2px;
+    position: absolute;
+    transition: transform 0.15s ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+    content: "";
+    display: block;
+}
+
+.hamburger-inner::before {
+    top: -10px;
+}
+
+.hamburger-inner::after {
+    bottom: -10px;
+}
+
+.header__menu-toggle.open .hamburger-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.header__menu-toggle.open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.header__menu-toggle.open .hamburger-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Estado aberto do menu */
+.header__menu-toggle.open .hamburger-inner {
+    transform: rotate(45deg);
+}
+
+.header__menu-toggle.open .hamburger-inner::before {
+    transform: rotate(-90deg) translate(-10px, 0);
+    opacity: 0;
+}
+
+.header__menu-toggle.open .hamburger-inner::after {
+    transform: rotate(90deg) translate(-10px, 0);
+    opacity: 0;
+}
+
+/* Animação do menu */
+.header__nav-list {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .header__nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .header__nav-list {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        padding: 0;
+    }
+
+    .header__nav-list.active {
+        max-height: 500px;
+        opacity: 1;
+        padding: 1rem 0;
+    }
+
+    .header__nav-item {
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+
+    .header__menu-toggle {
+        display: block;
+    }
+
+    .header__login-button {
+        width: 100%;
+        text-align: left;
+        padding: 0.8rem 0;
+        background-color: transparent;
+        color: #252525;
+    }
+
+    .header__login-button:hover {
+        background-color: transparent;
+        color: #3498db;
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .header__logo {
+        height: 60px;
+    }
 }
