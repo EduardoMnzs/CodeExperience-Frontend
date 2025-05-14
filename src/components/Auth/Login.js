@@ -74,7 +74,7 @@ const Login = () => {
               <Link to="/forgot-password">Esqueceu a senha?</Link>
             </div>
             <div className="create-account">
-              <span>Não tem conta? </span>
+              <span>Não tem conta? </span><br></br>
               <Link to="/register">Criar conta</Link>
             </div>
           </div>

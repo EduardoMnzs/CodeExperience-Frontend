@@ -1,0 +1,114 @@
+.relatorio-container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.relatorio-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.relatorio-info {
+  font-size: 1rem;
+  color: #555;
+}
+
+.relatorio-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.relatorio-button:hover {
+  background-color: #0056b3;
+}
+
+/* Wrapper com scroll */
+.relatorio-tabela-wrapper {
+  max-height: 500px; /* Altura máxima antes do scroll vertical */
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Tabela */
+.relatorio-table {
+  width: 100%;
+  min-width: 800px; /* força scroll horizontal em telas pequenas */
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.relatorio-table th,
+.relatorio-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* evita quebra de linha nas células */
+}
+
+.relatorio-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+}
+
+.relatorio-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .relatorio-table,
+  .relatorio-table thead,
+  .relatorio-table tbody,
+  .relatorio-table th,
+  .relatorio-table td,
+  .relatorio-table tr {
+    display: block;
+  }
+
+  .relatorio-table thead {
+    display: none;
+  }
+
+  .relatorio-table tr {
+    margin-bottom: 1rem;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  .relatorio-table td {
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+    white-space: normal;
+  }
+
+  .relatorio-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    font-weight: bold;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .relatorio-tabela-wrapper {
+    overflow-x: auto;
+  }
+}

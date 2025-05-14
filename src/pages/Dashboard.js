@@ -6,6 +6,7 @@ import '../assets/style/dashboard.css';
 import { presencaAPI } from '../api/presenca';
 import { FaSignOutAlt } from 'react-icons/fa';
 import Popup from '../components/Notification/Popup';
+import RelatorioAlunos from '../components/RelatorioAlunos';
 
 const Dashboard = () => {
     const [keyword, setKeyword] = useState('');
@@ -180,6 +181,8 @@ const Dashboard = () => {
                 </div>
 
                 <div className="divider"></div>
+
+                <RelatorioAlunos />
 
                 <div className="keyword-section">
                     <h3>Palavra-chave do dia</h3>

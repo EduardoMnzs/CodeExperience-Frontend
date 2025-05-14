@@ -156,17 +156,17 @@ const Home = () => {
               </ul>
             </div>
           </div>
-          <h2>Galeria de <span className="highlight">Fotos</span></h2>
+          {/* <h2>Galeria de <span className="highlight">Fotos</span></h2>
           <p className="subtitle">
             Esses são alguns dos momentos mais legais do nosso evento passado!<br />
             Venha fazer parte dessa experiência incrível e registre seus melhores momentos com a gente!
-          </p>
+          </p> */}
         </div>
 
-        <ImageCarousel images={eventImages} />
+        {/* <ImageCarousel images={eventImages} /> */}
 
         {/* Prizes Section */}
-        <div className="testimonials-section">
+        {/* <div className="testimonials-section">
           <h2>Premiação para os <span className="highlight">destaques</span></h2>
           <p className="subtitle">
             Os alunos que se destacarem serão premiados e todos ganham brindes!
@@ -213,10 +213,10 @@ const Home = () => {
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Testimonials from Previous Events */}
-        <div className="testimonials-section">
+        {/* <div className="testimonials-section">
           <h2>O que acham do <span className="highlight">nosso evento</span></h2>
 
           <div className="testimonials-grid">
@@ -280,7 +280,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Final CTA Section */}
         <div className="testimonials-section">
