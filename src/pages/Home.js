@@ -224,8 +224,8 @@ const Home = () => {
               <div className="student-info">
                 <img src={aluno} alt="Estudante João" className="student-avatar" />
                 <div>
-                  <h3 className="student-name">João, 16 anos</h3>
-                  <span className="student-detail">Participante 2022</span>
+                  <h3 className="student-name">João Lucas, 16 anos</h3>
+                  <span className="student-detail">Participante 2023</span>
                 </div>
               </div>
               <p className="testimonial-text">
@@ -244,8 +244,8 @@ const Home = () => {
               <div className="student-info">
                 <img src={aluno} alt="Estudante Maria" className="student-avatar" />
                 <div>
-                  <h3 className="student-name">Maria, 17 anos</h3>
-                  <span className="student-detail">Vencedora 2022</span>
+                  <h3 className="student-name">Maria Eduarda, 17 anos</h3>
+                  <span className="student-detail">Participante 2024</span>
                 </div>
               </div>
               <p className="testimonial-text">

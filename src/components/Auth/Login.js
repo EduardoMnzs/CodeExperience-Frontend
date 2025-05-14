@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -9,18 +9,23 @@ const Login = () => {
   const [senha, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login({ email, senha });
-      navigate('/codeexperience');
     } catch (err) {
       setError('Credenciais inválidas. Por favor, tente novamente.');
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate(user.role === 'Admin' ? '/dashboard' : '/codeexperience');
+    }
+  }, [user, navigate]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

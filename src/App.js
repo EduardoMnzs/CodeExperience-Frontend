@@ -29,8 +29,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <PrivateRoute>
-              <Layout />
+            <PrivateRoute requiredRole="Admin">
               <Dashboard />
             </PrivateRoute>
           }

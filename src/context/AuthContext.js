@@ -69,7 +69,10 @@ export const AuthProvider = ({ children }) => {
       if (response.data?.token) {
         localStorage.setItem('token', response.data.token);
         await loadUserProfile();
-        navigate(credentials.from || '/');
+
+        // Redirecionamento baseado no role
+        const redirectPath = user?.role === 'Admin' ? '/dashboard' : (credentials.from || '/codeexperience');
+        navigate(redirectPath);
       }
       return response;
     } catch (error) {
@@ -100,11 +103,11 @@ export const AuthProvider = ({ children }) => {
   }, [user, loadUserProfile, logout]);
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      register, 
-      login, 
+    <AuthContext.Provider value={{
+      user,
+      loading,
+      register,
+      login,
       logout,
       isAuthenticated: !!user
     }}>
