@@ -108,17 +108,17 @@ const CodeExperience = () => {
             const hora = agora.getHours();
             const minuto = agora.getMinutes();
 
-            // Ajuste o horário conforme necessário aqui
-            const dentroDoHorario = ((hora >= 13 && hora < 20) || (hora === 18 && minuto === 30));
+            const dentroDoHorario = (hora === 19) || (hora === 20 && minuto === 0);
 
             setInputHabilitado(dentroDoHorario);
             setButtonHabilitado(dentroDoHorario);
         };
 
         verificarHorario();
-        const intervalo = setInterval(verificarHorario, 60 * 1000);
 
-        return () => clearInterval(intervalo);
+        const intervalId = setInterval(verificarHorario, 60000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {
