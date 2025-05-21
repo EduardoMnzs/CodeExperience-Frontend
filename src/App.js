@@ -7,6 +7,8 @@ import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
 import CodeExperience from './pages/codeexperience';
 import PrivateRoute from './components/PrivateRoute';
+import ResetPassword from './pages/ResetPassword';
+import ForgotPassword from './pages/ForgotPassword';
 import GlobalStyle from './assets/style/global.css';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <Route path="/about" element={<><Layout /></>} />
         <Route path="/contact" element={<><Layout /></>} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route 
           path="/codeexperience"

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { authAPI } from '../api/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
@@ -8,6 +8,15 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const publicPaths = ['/', '/login', '/register', '/forgot-password', '/reset-password'];
+
+  const logout = useCallback(() => {
+    localStorage.removeItem('token');
+    setUser(null);
+    navigate('/login');
+  }, [navigate]);
 
   const loadUserProfile = useCallback(async () => {
     try {
@@ -28,21 +37,27 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkAuth = async () => {
+      const currentPath = location.pathname;
+
+      const isPublicPath = publicPaths.some(path => currentPath.startsWith(path));
+
       try {
         const isAuthenticated = await loadUserProfile();
-        if (!isAuthenticated) {
+        if (!isAuthenticated && !isPublicPath) {
           logout();
         }
       } catch (error) {
         console.error('Auth check failed', error);
-        logout();
+        if (!isPublicPath) {
+          logout();
+        }
       } finally {
         setLoading(false);
       }
     };
 
     checkAuth();
-  }, [loadUserProfile]);
+  }, [loadUserProfile, location, logout]);
 
   const register = async (userData) => {
     try {
@@ -82,12 +97,6 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
-
-  const logout = useCallback(() => {
-    localStorage.removeItem('token');
-    setUser(null);
-    navigate('/login');
-  }, [navigate]);
 
   useEffect(() => {
     const interval = setInterval(async () => {
