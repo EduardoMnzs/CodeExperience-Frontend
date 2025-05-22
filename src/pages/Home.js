@@ -1,12 +1,12 @@
 import React from 'react';
 import '../assets/style/home.css';
 import frascoAzul from '../assets/images/frascoAzul.png';
-import aluno from '../assets/images/aluno.png';
-import medalha1 from '../assets/images/medalha1.png';
-import medalha2 from '../assets/images/medalha2.png';
-import medalha3 from '../assets/images/medalha3.png';
-import estrelas from '../assets/images/estrela.png';
-import certificado from '../assets/images/certificado.png';
+// import aluno from '../assets/images/aluno.png';
+// import medalha1 from '../assets/images/medalha1.png';
+// import medalha2 from '../assets/images/medalha2.png';
+// import medalha3 from '../assets/images/medalha3.png';
+// import estrelas from '../assets/images/estrela.png';
+// import certificado from '../assets/images/certificado.png';
 import AboutSection from '../components/home/AboutSection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -22,17 +22,17 @@ import {
   faStar,
   faShareAlt
 } from '@fortawesome/free-solid-svg-icons';
-import ImageCarousel from '../components/home/ImageCarousel';
+// import ImageCarousel from '../components/home/ImageCarousel';
 
 
 const Home = () => {
 
-  const eventImages = [
-    certificado,
-    certificado,
-    certificado,
-    certificado,
-  ];
+  // const eventImages = [
+  //   certificado,
+  //   certificado,
+  //   certificado,
+  //   certificado,
+  // ];
 
   return (
     <div className="background-container">

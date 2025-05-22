@@ -13,5 +13,6 @@ API.interceptors.request.use((config) => {
 });
 
 export const presencaAPI = {
-    registrar: (dados) => API.post('/presenca', dados)
+    registrar: (dados) => API.post('/presenca', dados),
+    secretKey: (credentials) => API.get('/key/palavra-chave', credentials),
 };

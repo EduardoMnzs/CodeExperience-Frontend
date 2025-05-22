@@ -13,45 +13,12 @@ const Dashboard = () => {
     const { user, logout } = useAuth();
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [showPopup, setShowPopup] = useState(false);
+    const [keywordPlaceholder, setKeywordPlaceholder] = useState('Carregando...');
 
     const firstName = user?.nome?.split(' ')[0] || 'Aluno';
 
     const handleLogout = () => {
         logout();
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const trimmedKeyword = keyword.trim().toLowerCase();
-
-        if (!trimmedKeyword || !localizacao.latitude || !localizacao.longitude) {
-            setNotification({
-                message: 'Preencha a palavra-chave e permita a localização!',
-                type: 'error'
-            });
-            return;
-        }
-
-        try {
-            await presencaAPI.registrar({
-                palavraChave: trimmedKeyword,
-                latitude: localizacao.latitude,
-                longitude: localizacao.longitude
-            });
-
-            setNotification({
-                message: 'Presença registrada com sucesso!',
-                type: 'success'
-            });
-            setKeyword('');
-        } catch (error) {
-            console.error(error);
-            setNotification({
-                message: error.response?.data?.error || 'Erro ao registrar presença.',
-                type: 'error'
-            });
-        }
     };
 
     const closeNotification = () => {
@@ -138,6 +105,20 @@ const Dashboard = () => {
         }
     }, []);
 
+    useEffect(() => {
+        const fetchKeyword = async () => {
+            try {
+                const response = await presencaAPI.secretKey();
+                setKeywordPlaceholder(response.data.palavra || 'Palavra não disponível');
+            } catch (error) {
+                setKeywordPlaceholder('Erro ao carregar');
+                console.error('Erro ao buscar palavra-chave:', error);
+            }
+        };
+
+        fetchKeyword();
+    }, []);
+
     return (
         <div className="code-experience-page">
             <header className="header">
@@ -186,15 +167,13 @@ const Dashboard = () => {
 
                 <div className="keyword-section">
                     <h3>Palavra-chave do dia</h3>
-                    <form onSubmit={handleSubmit}>
+                    <form>
                         <input
                             type="text"
                             value={keyword}
-                            onChange={(e) => setKeyword(e.target.value)}
-                            placeholder={inputHabilitado ? "Digite a palavra-chave" : "Indisponível"}
-                            disabled={!inputHabilitado}
+                            placeholder={keywordPlaceholder}
+                            disabled
                         />
-                        <button type="submit" disabled={!buttonHabilitado}>Enviar</button>
                     </form>
                 </div>
             </main>

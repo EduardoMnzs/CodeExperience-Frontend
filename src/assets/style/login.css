@@ -119,6 +119,22 @@
     font-weight: 500;
 }
 
+.create-account-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.create-account-link a {
+    text-align: center;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4FACFE;
+}
+
 .create-account a:hover {
     text-decoration: underline;
 }
