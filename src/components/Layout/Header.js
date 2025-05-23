@@ -49,11 +49,6 @@ const Header = () => {
             </Link>
           </li>
           <li className="header__nav-item">
-            <Link to="/contact" className="header__nav-link" onClick={closeMenu}>
-              Contate-nos
-            </Link>
-          </li>
-          <li className="header__nav-item">
             <Link to="/login" className="header__login-button" onClick={closeMenu}>
               Login
             </Link>

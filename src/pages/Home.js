@@ -86,7 +86,7 @@ const Home = () => {
               </button>
               <div className="small-text">
                 <FontAwesomeIcon icon={faStar} />
-                <span> Evento limitado a 1000 vagas - Garanta já a sua!</span>
+                <span> Evento limitado a 500 vagas - Garanta já a sua!</span>
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@ const Home = () => {
                 05 de Maio de 2025
               </p>
               <p className="event-detail-subcontent">
-                Das 17h às 19h - Horário de Brasília
+                Das 18h às 19h30 - Horário de Brasília
               </p>
             </div>
 
@@ -139,7 +139,7 @@ const Home = () => {
                 UNIMAR - Universidade de Marília
               </p>
               <p className="event-detail-subcontent">
-                Av. Higino Muzi Filho, 1001 - Reitoria
+                Av. Higino Muzi Filho, 1001 - Bloco 4
               </p>
             </div>
 
