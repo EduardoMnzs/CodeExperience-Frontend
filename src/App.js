@@ -10,7 +10,7 @@ import PrivateRoute from './components/PrivateRoute';
 import ResetPassword from './pages/ResetPassword';
 import ForgotPassword from './pages/ForgotPassword';
 import About from './pages/About';
-import GlobalStyle from './assets/style/global.css';
+import './assets/style/global.css';
 
 function App() {
   return (

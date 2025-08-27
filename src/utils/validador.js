@@ -5,12 +5,12 @@ export const validarCPF = (cpf) => {
         return false;
     }
 
-    const calcularDigitoVerificador = (cpf, posicao) => {
+    const calcularDigitoVerificador = (baseCpf, posicao) => {
         let soma = 0;
         let multiplicador = posicao + 1;
 
         for (let i = 0; i < posicao; i++) {
-            soma += parseInt(cpf.charAt(i)) * multiplicador--;
+            soma += parseInt(baseCpf.charAt(i)) * multiplicador--;
         }
 
         const resto = soma % 11;
@@ -18,9 +18,11 @@ export const validarCPF = (cpf) => {
     };
 
     const primeiroDigito = calcularDigitoVerificador(cpf, 9);
-    const segundoDigito = calcularDigitoVerificador(cpf + primeiroDigito, 10);
 
-    return cpf.charAt(9) == primeiroDigito && cpf.charAt(10) == segundoDigito;
+    const baseParaSegundoDigito = cpf.substring(0, 9) + primeiroDigito;
+    const segundoDigito = calcularDigitoVerificador(baseParaSegundoDigito, 10);
+
+    return parseInt(cpf.charAt(9)) === primeiroDigito && parseInt(cpf.charAt(10)) === segundoDigito;
 };
 
 export const validarSenha = (senha) => {

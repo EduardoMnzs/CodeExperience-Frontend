@@ -1,7 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
-import logo from "../assets/images/logo.png";
 import "../assets/style/about.css";
 
 const About = () => {
