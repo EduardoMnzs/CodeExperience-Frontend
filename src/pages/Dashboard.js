@@ -99,8 +99,8 @@ const Dashboard = () => {
     };
 
     const calculateProgress = () => {
-        const startDate = '2025-05-05';
-        const endDate = '2025-05-17';
+        const startDate = '2025-08-25';
+        const endDate = '2025-09-05';
         const today = new Date();
 
         if (today < new Date(startDate)) return 0;
