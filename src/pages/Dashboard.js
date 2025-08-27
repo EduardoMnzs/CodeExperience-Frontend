@@ -9,9 +9,29 @@ import Popup from '../components/Notification/Popup';
 import RelatorioAlunos from '../components/RelatorioAlunos';
 
 const Dashboard = () => {
+    // Função para lidar com o submit da presença
+    const handleSubmitPresenca = async (e) => {
+        e.preventDefault();
+        if (!keyword) {
+            setNotification({ message: 'Digite a palavra-chave!', type: 'error' });
+            return;
+        }
+        try {
+            const response = await presencaAPI.registrarPresenca(keyword);
+            if (response.data.success) {
+                setNotification({ message: 'Presença registrada com sucesso!', type: 'success' });
+                setKeyword('');
+            } else {
+                setNotification({ message: response.data.message || 'Erro ao registrar presença.', type: 'error' });
+            }
+        } catch (error) {
+            setNotification({ message: 'Erro ao registrar presença.', type: 'error' });
+        }
+    };
     // Estados do componente
     const { user, logout } = useAuth();
     const [keyword, setKeyword] = useState('');
+    const [keywordPlaceholder, setKeywordPlaceholder] = useState('Digite a palavra-chave do dia');
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
     const [isFormEnabled, setIsFormEnabled] = useState(false);
@@ -25,23 +45,18 @@ const Dashboard = () => {
     };
 
     // Função para lidar com a submissão da palavra-chave
-    const handleSubmitPresenca = async (e) => {
-        e.preventDefault();
-        if (!keyword) {
-            setNotification({ message: 'Por favor, digite a palavra-chave.', type: 'error' });
-            return;
-        }
-
-        try {
-            // Supondo que a API espera um objeto com a palavra
-            await presencaAPI.marcarPresenca({ palavra: keyword });
-            setNotification({ message: 'Presença registrada com sucesso!', type: 'success' });
-            setKeyword(''); // Limpa o campo após o sucesso
-        } catch (error) {
-            const errorMessage = error.response?.data?.error || 'Palavra-chave incorreta ou erro no servidor.';
-            setNotification({ message: errorMessage, type: 'error' });
-        }
-    };
+    useEffect(() => {
+        const fetchKeyword = async () => {
+            try {
+                const response = await presencaAPI.secretKey();
+                setKeywordPlaceholder(response.data.palavra || 'Palavra não disponível');
+            } catch (error) {
+                setKeywordPlaceholder('Erro ao carregar');
+                console.error('Erro ao buscar palavra-chave:', error);
+            }
+        };
+        fetchKeyword();
+    }, []);
 
     // Hook para verificar o horário e habilitar o formulário de presença
     useEffect(() => {
@@ -146,18 +161,15 @@ const Dashboard = () => {
 
                 {/* Seção de Registro de Presença */}
                 <div className="keyword-section">
-                    <h3>Registrar Presença</h3>
+                    <h3>Palavra-chave do dia</h3>
                     <form onSubmit={handleSubmitPresenca}>
                         <input
                             type="text"
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
-                            placeholder={isFormEnabled ? "Digite a palavra-chave do dia" : "Fora do horário de registro"}
+                            placeholder={keywordPlaceholder}
                             disabled={!isFormEnabled}
                         />
-                        <button type="submit" disabled={!isFormEnabled}>
-                            Confirmar Presença
-                        </button>
                     </form>
                     {notification.message && (
                         <div className={`notification ${notification.type}`}>
@@ -168,7 +180,6 @@ const Dashboard = () => {
 
                 <div className="divider"></div>
 
-                {/* Componente de Relatório de Alunos */}
                 <RelatorioAlunos />
             </main>
         </div>
