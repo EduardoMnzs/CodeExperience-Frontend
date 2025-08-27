@@ -4,6 +4,8 @@ import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../../assets/style/login.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Reset = () => {
   const { token } = useParams();
   const [novaSenha, setNovaSenha] = useState('');
@@ -16,13 +18,18 @@ const Reset = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!API_URL) {
+      setErro('Erro de configuração: A URL da API não foi definida. Verifique o arquivo .env.');
+      return;
+    }
+
     if (novaSenha !== confirmarSenha) {
       setErro('As senhas não coincidem.');
       return;
     }
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/reset-password/${token}`, {
+      const res = await axios.post(`${API_URL}/auth/reset-password/${token}`, {
         novaSenha,
       });
       setMensagem(res.data.message);
