@@ -9,16 +9,16 @@ const About = () => {
         <div className="ce-about-page">
             <main className="ce-about-main">
                 <div className="ce-about-content">
-                    <h1 className="ce-about-title">Bem-vindo ao CodeExperience!</h1>
+                    <h1 className="ce-about-title">Bem-vindo ao Bootcamp!</h1>
                     <p className="ce-about-text">
-                        O CodeExperience é uma plataforma inovadora que visa proporcionar uma
+                        O Bootcamp é uma plataforma inovadora que visa proporcionar uma
                         experiência de aprendizado única e envolvente para estudantes de
                         programação. Nossa missão é ajudar você a desenvolver suas habilidades
                         de codificação e se preparar para o futuro.
                     </p>
                     <p className="ce-about-text">
                         Com uma variedade de exercícios práticos, desafios e recursos
-                        interativos, o CodeExperience oferece um ambiente ideal para você
+                        interativos, o Bootcamp oferece um ambiente ideal para você
                         aprimorar suas habilidades e se tornar um desenvolvedor mais
                         confiante e preparado para o mercado.
                     </p>
@@ -70,7 +70,7 @@ const About = () => {
             </main>
             <footer className="ce-about-footer">
                 <p className="ce-footer-text">
-                    © {new Date().getFullYear()} CodeExperience. Todos os direitos reservados.
+                    © {new Date().getFullYear()} Bootcamp. Todos os direitos reservados.
                     <br />
                     Desenvolvido por Eduardo Menezes.
                 </p>

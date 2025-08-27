@@ -154,7 +154,7 @@ const Dashboard = () => {
                 </h1>
 
                 <div className="progress-section">
-                    <h2>Progresso - Code Experience</h2>
+                    <h2>Progresso - Bootcamp</h2>
                     <h1 style={{ color: `${progressColor}` }} >{progress}% Completo</h1>
                     <div className="progress-bar">
                         <div className="progress-fill" style={{ width: `${progress}%`, background: `${progressColor}` }}></div>

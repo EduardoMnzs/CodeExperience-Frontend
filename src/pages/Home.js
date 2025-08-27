@@ -41,7 +41,7 @@ const Home = () => {
         <div className="content-wrapper">
           <div className="left-section">
             <h1 className="main-title">
-              <span className="highlight">Code Experience</span><br />
+              <span className="highlight">Bootcamp 2025</span><br />
               Seu primeiro contato com o mundo da programação!
             </h1>
             <p className="subtitle">
@@ -54,7 +54,7 @@ const Home = () => {
                   <FontAwesomeIcon icon={faLaptopCode} />
                 </div>
                 <div className="benefit-text">
-                  <h3>Workshops de Python</h3>
+                  <h3>Workshops de Frontend e Backend</h3>
                   <p>Aprenda o básico de programação de forma descomplicada</p>
                 </div>
               </div>
@@ -121,10 +121,11 @@ const Home = () => {
                 <h3 className="event-detail-title">Quando?</h3>
               </div>
               <p className="event-detail-content">
-                05 de Maio de 2025
+                25 de Agosto de 2025
               </p>
               <p className="event-detail-subcontent">
-                Das 18h às 19h30 - Horário de Brasília
+                Das 15h às 17h - Horário de Brasília<br></br>
+                Ou das 17h30 às 19h30 - Horário de Brasília<br></br>
               </p>
             </div>
 
@@ -139,7 +140,7 @@ const Home = () => {
                 UNIMAR - Universidade de Marília
               </p>
               <p className="event-detail-subcontent">
-                Av. Higino Muzi Filho, 1001 - Bloco 4
+                Av. Higino Muzi Filho, 1001 - Bloco 5
               </p>
             </div>
 

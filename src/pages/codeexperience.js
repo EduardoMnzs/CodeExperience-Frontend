@@ -75,8 +75,8 @@ const CodeExperience = () => {
     };
 
     const calculateProgress = () => {
-        const startDate = '2025-05-05';
-        const endDate = '2025-05-17';
+        const startDate = '2025-08-25';
+        const endDate = '2025-09-05';
         const today = new Date();
 
         if (today < new Date(startDate)) return 0;
@@ -108,7 +108,11 @@ const CodeExperience = () => {
             const hora = agora.getHours();
             const minuto = agora.getMinutes();
 
-            const dentroDoHorario = (hora === 19) || (hora === 20 && minuto === 0);
+            const minutosAtuais = hora * 60 + minuto;
+            const inicio = 15 * 60;   // 15:00 em minutos = 900
+            const fim = 19 * 60 + 30; // 19:30 em minutos = 1170
+
+            const dentroDoHorario = minutosAtuais >= inicio && minutosAtuais <= fim;
 
             setInputHabilitado(dentroDoHorario);
             setButtonHabilitado(dentroDoHorario);
@@ -182,19 +186,12 @@ const CodeExperience = () => {
                 </h1>
 
                 <div className="progress-section">
-                    <h2>Progresso - Code Experience</h2>
+                    <h2>Progresso - Bootcamp</h2>
                     <h1 style={{ color: `${progressColor}` }} >{progress}% Completo</h1>
                     <div className="progress-bar">
                         <div className="progress-fill" style={{ width: `${progress}%`, background: `${progressColor}` }}></div>
                     </div>
                 </div>
-
-                <div className="exercises-section">
-                    <h3>Exercícios de Fixação</h3>
-                    <ExerciseCards />
-                </div>
-
-                <div className="divider"></div>
 
                 <div className="keyword-section">
                     <h3>Palavra-chave do dia</h3>
@@ -208,6 +205,13 @@ const CodeExperience = () => {
                         />
                         <button type="submit" disabled={!buttonHabilitado}>Enviar</button>
                     </form>
+                </div>
+
+                <div className="divider"></div>
+                
+                <div className="exercises-section">
+                    <h3>Exercícios de Fixação - Python</h3>
+                    <ExerciseCards />
                 </div>
             </main>
         </div>

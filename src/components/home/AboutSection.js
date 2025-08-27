@@ -9,7 +9,7 @@ const AboutSection = () => {
       <div className="about-content">
         <h2 className="about-title">Sobre o Evento</h2>
         <p className="about-description">
-          O Code Experience é um evento criado por apaixonados por tecnologia que acreditam no poder 
+          O Bootcamp é um evento criado por apaixonados por tecnologia que acreditam no poder 
           transformador da programação. Nosso objetivo é desmistificar o mundo da codificação e 
           inspirar estudantes do ensino médio a explorarem carreiras em tecnologia. Vamos juntos 
           construir o futuro digital!
@@ -36,7 +36,7 @@ const AboutSection = () => {
             <div className="stat-icon">
               <FontAwesomeIcon icon={faUsers} />
             </div>
-            <div className="stat-number">100+</div>
+            <div className="stat-number">30+</div>
             <div className="stat-label">Mentores Voluntários</div>
           </div>
         </div>

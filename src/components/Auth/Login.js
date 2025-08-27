@@ -83,7 +83,7 @@ const Login = () => {
         <button className="submit-button-login" type="submit">Entrar</button>
 
         <div className="saiba-mais">
-          <span>Não conhece o Code Experience?</span>
+          <span>Não conhece o Bootcamp?</span>
           <Link to="/about"> Saiba mais</Link>
         </div>
 

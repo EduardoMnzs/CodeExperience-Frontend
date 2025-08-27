@@ -15,7 +15,7 @@ import desafio from '../../components/pdfs/desafio.pdf';
 
 const ExerciseCards = () => {
   // Data de início do curso
-  const courseStartDate = '2025-05-05';
+  const courseStartDate = '2025-08-25';
   
   // Mapeamento de PDFs para cada exercício
   const pdfPaths = {
@@ -39,7 +39,7 @@ const ExerciseCards = () => {
         id: 1,
         title: 'Básico I',
         description: 'Atividade introdutória para iniciar a prática em programação.',
-        unlockDay: 3
+        unlockDay: 2
       },
       {
         id: 2,
