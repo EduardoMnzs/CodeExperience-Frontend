@@ -110,7 +110,7 @@ const CodeExperience = () => {
 
             const minutosAtuais = hora * 60 + minuto;
             const inicio = 15 * 60;   // 15:00 em minutos = 900
-            const fim = 19 * 60 + 30; // 19:30 em minutos = 1170
+            const fim = 22 * 60; // 19:30 em minutos = 1170
 
             const dentroDoHorario = minutosAtuais >= inicio && minutosAtuais <= fim;
 

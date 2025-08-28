@@ -63,7 +63,7 @@ const Dashboard = () => {
         const checkTime = () => {
             const now = new Date();
             const hour = now.getHours();
-            const isWithinTime = hour >= 15 && hour < 20;
+            const isWithinTime = hour >= 15 && hour < 22;
             setIsFormEnabled(isWithinTime);
         };
 
